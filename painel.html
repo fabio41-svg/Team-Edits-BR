@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>TEAM EDITS - Painel</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>TEAM EDITS</h1>
+
+<p>Atualizações oficiais do grupo</p>
+
+<button onclick="logout()">Sair</button>
+
+<hr>
+
+<div class="card-info">
+  <h2>🏆 Campeonatos</h2>
+  <p>• Nenhum campeonato finalizado ainda</p>
+</div>
+
+<div class="card-info">
+  <h2>👑 Melhor Editor da Semana</h2>
+  <p>• Será atualizado semanalmente</p>
+</div>
+
+<div class="card-info">
+  <h2>📢 Avisos</h2>
+  <p>• Bem-vindo ao painel oficial da equipe</p>
+</div>
+
+<script type="module">
+import { auth } from "./firebase.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+/* PROTEÇÃO: só entra logado */
+onAuthStateChanged(auth, (user) => {
+    if (!user) {
+        window.location.href = "index.html";
+    }
+});
+
+/* logout */
+import { signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+window.logout = () => {
+    signOut(auth).then(() => {
+        window.location.href = "index.html";
+    });
+};
+</script>
+
+</body>
+</html>
